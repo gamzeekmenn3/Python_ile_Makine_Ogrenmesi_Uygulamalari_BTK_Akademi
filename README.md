@@ -67,4 +67,6 @@ Kod Akışı:
 3. Modelin, daha önce görmediği test verisi üzerindeki performansı ölçülür.
 4. Eğitilen modelin iç yapısı grafiksel olarak çizilerek modelin karar verme mantığı anlaşılır hale getirilir. Her düğümdeki kutu, karar kuralını, örnek sayısını ve sınıf dağılımını gösterir.
 5. Modelin nihai kararlarında hangi özelliklerin en kritik olduğunu gösterir.
+   
 Bu çıktıya göre, modelin Iris türünü sınıflandırmada en çok petal length ve petal width özelliklerine güvendiği anlaşılır.
+
