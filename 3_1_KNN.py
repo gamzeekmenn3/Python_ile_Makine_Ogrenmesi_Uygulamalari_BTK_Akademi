@@ -1,4 +1,3 @@
-# sklearn: ML Library
 from sklearn.datasets import load_breast_cancer
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import accuracy_score, confusion_matrix
@@ -26,8 +25,8 @@ scaler = StandardScaler()
 X_train = scaler.fit_transform(X_train)
 X_test = scaler.transform(X_test)
 
-
-knn = KNeighborsClassifier(n_neighbors=3) # Model olusturma komsu parametresini unutma  ******
+# Knn modeli oluştur ve train et 
+knn = KNeighborsClassifier(n_neighbors=3)
 knn.fit(X_train,y_train)  # fit fonksiyonu verimizi (samples + target) kullanarak knn algoritmasini eğitir
 
 # (4) Sonuçların Değerlendirilmesi: test
@@ -43,7 +42,7 @@ print(conf_matrix)
 # (5) Hiperparametre Ayarlaması
 """
     KNN: Hyperparameter = K
-        K:1, 2, 3, ... N
+        K: 1, 2, 3, ... N
         Accuracy: %A, %B, %C ....
 """
 accuracy_values = []
@@ -64,7 +63,31 @@ plt.ylabel("Dogruluk")
 plt.xticks(k_values)
 plt.grid(True)
 
-
 # %%
 import numpy as np
-np.random.rand(40, 1) #uniform
+import matplotlib.pyplot as plt
+from sklearn.neighbors import KNeighborsRegressor
+
+X = np.sort(5 * np.random.rand(40, 1), axis = 0) # features
+y = np.sin(X).ravel() # target
+# plt.scatter(X, y)
+
+# add noise
+y[::5] += 1 * (0.5 - np.random.rand(8))
+# plt.scatter(X, y)
+
+T = np.linspace(0, 5, 500)[:, np.newaxis]
+
+for i, weight in enumerate(["uniform", "distance"]):
+    knn = KNeighborsRegressor(n_neighbors = 5, weights = weight)
+    y_pred = knn.fit(X, y).predict(T)
+    
+    plt.subplot(2, 1, i+1)
+    plt.scatter(X, y, color = "green", label = "data")
+    plt.plot(T, y_pred, color = "blue", label = "prediction")
+    plt.axis("tight")
+    plt.legend()
+    plt.title("KNN Regressor weights = {}".format(weight))
+    
+plt.tight_layout()
+plt.show()
