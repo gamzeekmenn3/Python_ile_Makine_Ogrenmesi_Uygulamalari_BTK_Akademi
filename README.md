@@ -33,8 +33,9 @@ Proje İçeriği:
 Kullanılan Kütüphaneler:
 - numpy: Sayısal işlemler ve veri seti oluşturma.
 - matplotlib: Grafik çizimi ve görselleştirme.
-- sklearn.neighbors: KNN Regresyon modelini kullanmak. 
-
+- sklearn.neighbors: KNN Regresyon modelini kullanmak.
+  
+Kod Akışı:
 1. X değerleri (0 ile 5 arasında 40 nokta) oluşturulur ve y değerleri (y = sin(X)) hesaplanır. Daha sonra gerçekçi simülasyon için her 5. noktaya gürültü eklenir.
 2. Modelin 0 ile 5 aralığındaki tüm tahmin eğrisini detaylıca çizebilmek için yoğun bir test aralığı ("T") oluşturulur.
 3. Bir döngü ile iki farklı ağırlıklandırma yöntemi denenir. Her döngüde model eğitilir ve test noktaları üzerinde tahmin yapılır.
@@ -42,3 +43,28 @@ Kullanılan Kütüphaneler:
   * "uniform": Tahmin eğrisi, komşuların ortalamasını aldığı için daha basamaklı görünme eğilimindedir.
   * "distance": Daha yakın komşular daha fazla etkili olduğu için, tahmin eğrisi genellikle orijinal verilere daha yakındır.
 Bu karşılaştırma, KNN Regresyon algoritmasında mesafe bazlı ağırlıklandırmanın (distance) genellikle temel sinyal eğilimini takip etmede, basit ortalama ağırlıklandırmaya (uniform) kıyasla daha iyi ve daha az basamaklı tahmin eğrileri ürettiğini gösterir. Bu, makine öğrenmesinde hiperparametre seçiminin önemini vurgular.
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+3_2_DecisionTree.py dosyası, Iris veri setini kullanarak bir Decision Tree-DT sınıflandırma modelini uygulamakta, eğitmekte ve modelin sonuçlarını detaylıca görselleştirmektedir. Projenin temel amacı, bir çiçeğin taç ve çanak yaprağı ölçümleri gibi özelliklerine bakarak hangi Iris türüne (Setosa, Versicolor, Virginica) ait olduğunu yüksek doğrulukla tahmin edebilen bir model oluşturmaktır.
+
+Proje İçeriği:
+* Veri Hazırlama: Iris veri setinin %80'i eğitim, %20'si test için ayrılmıştır.
+* Model Eğitimi: Gini katsayısı (criterion="gini") ve maksimum 5 derinlik (max_depth=5) ile bir DecisionTreeClassifier eğitilmiştir.
+* Değerlendirme: Doğruluk skoru ve Karmaşıklık Matrisi ile model performansı ölçülmüştür.
+* Ağaç Görselleştirme: Eğitilmiş Karar Ağacının yapısı ve aldığı kararlar görselleştirilmiştir.
+
+Kullanılan Kütüphaneler:
+- sklearn.datasets: Iris veri setini yüklemek.
+- sklearn.tree: Karar Ağacı modelini (DecisionTreeClassifier) ve çizimini (plot_tree) sağlamak. 
+- sklearn.model_selection: Veriyi eğitim ve test kümelerine ayırmak.
+- sklearn.metrics: Model performansını değerlendirmek (Doğruluk, Karmaşıklık Matrisi).
+- matplotlib: Grafik çizimi ve görselleştirme.
+
+Kod Akışı:
+1. Veri setindeki özellikler (X) ve hedef sınıflar (y) ayrılır, ardından model eğitimi için hazır hale getirilir.
+2. Model, Gini katsayısı ve 5 maksimum derinlik (overfitting'i önlemek için) kullanılarak eğitilir.
+3. Modelin, daha önce görmediği test verisi üzerindeki performansı ölçülür.
+4. Eğitilen modelin iç yapısı grafiksel olarak çizilerek modelin karar verme mantığı anlaşılır hale getirilir. Her düğümdeki kutu, karar kuralını, örnek sayısını ve sınıf dağılımını gösterir.
+5. Modelin nihai kararlarında hangi özelliklerin en kritik olduğunu gösterir.
+Bu çıktıya göre, modelin Iris türünü sınıflandırmada en çok petal length ve petal width özelliklerine güvendiği anlaşılır.
