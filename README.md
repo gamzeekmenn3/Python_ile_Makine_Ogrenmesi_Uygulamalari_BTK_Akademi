@@ -70,3 +70,22 @@ Kod Akışı:
    
 Bu çıktıya göre, modelin Iris türünü sınıflandırmada en çok petal length ve petal width özelliklerine güvendiği anlaşılır.
 
+3_2_DecisionTree.py dosyası, Iris veri setini kullanarak bir Decision Tree sınıflandırıcısının karar sınırlarını incelemektedir. Iris veri setindeki dört özelliğin tüm olası ikişerli kombinasyonları için modeller eğitilir ve karar bölgeleri görselleştirilir. Modelin, farklı özellik çiftlerini kullandığında sınıflandırma uzayını nasıl böldüğünü ve hangi özelliklerin en net ayrımı sağladığını görsel olarak belirlemektir. Karar Ağacının temel özelliği olan eksenlere paralel karar sınırları bu grafikte açıkça görülür.
+
+Kullanılan Kütüphaneler:
+- sklearn.datasets: Iris veri setini yüklemek. 
+- sklearn.tree: Karar Ağacı sınıflandırma modelini kullanmak.
+- sklearn.inspection: Karar Sınırlarını (DecisionBoundaryDisplay) çizmek.
+- matplotlib: Grafik çizimi ve görselleştirme.
+- numpy: Sayısal işlemler ve veri manipülasyonu.
+
+Kod Akışı:
+1. Iris veri setinde dört özellik bulunur: Sepal Length (SL), Sepal Width (SW), Petal Length (PL) ve Petal Width (PW). Kod, bu 4 özelliğin tüm olası ikili kombinasyonunu dener.
+2. Bir döngü, 6 özellik çiftini de dolaşır. Her döngüde:
+    * Veri, o anki iki özellik kullanılarak filtre edilir (X = iris.data[:, pair]).
+    * Yeni bir DecisionTreeClassifier eğitilir (clf.fit(X, y)).
+3. Her bir modelin sonucu, 2x3 düzeninde bir alt grafiğe çizilir:
+    * Renk Alanları: Modelin ilgili bölgede hangi sınıfı tahmin edeceğini gösterir.
+    * Noktalar: Orijinal veri noktalarıdır ve modelin ne kadarının doğru bölgelerde yer aldığını gösterir.
+4. Grafikler incelendiğinde, genellikle Petal Length (PL) ve Petal Width (PW) özelliklerinin kullanıldığı grafiklerde (sağ alt köşe), Karar Sınırlarının en basit ve en net olduğu görülür. Bu, bu iki özelliğin Iris türlerini sınıflandırmak için en güçlü ayırıcılar olduğunu doğrular.
+
