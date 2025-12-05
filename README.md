@@ -108,3 +108,22 @@ Kod Akışı:
 
 Elde edilen RMSE değeri, modelin yaptığı tahminlerin, gerçek hastalık ilerleme seviyelerinden ortalama olarak ne kadar sapma gösterdiğini ifade eder. Bu değer, modeli diğer regresyon algoritmalarıyla (örneğin Lineer Regresyon) karşılaştırmak için kullanılacak temel ölçüttür.
 
+3_2_DecisionTree.py dosyası, Decision Tree Regressor modelinde maksimum derinliğin (max_depth) modelin genelleme yeteneği üzerindeki kritik rolünü görsel olarak incelemektedir. Yapay bir sinüs dalgası veri seti kullanılarak, sığ (shallow) ve derin (deep) ağaçların tahmin eğrileri karşılaştırılmıştır. Makine öğrenmesinde sıkça karşılaşılan Aşırı Öğrenme (Overfitting) ve Eksik Öğrenme (Underfitting) kavramlarını, "max_depth" hiperparametresi üzerinden somutlaştırmaktır.
+  * Sığ Ağaç (Max Depth = 2): Basit ve genelleştirilmiş bir eğri çizer. "Underfitting" riski taşır.
+  * Derin Ağaç (Max Depth = 15): Eğitim verisindeki gürültüyü dahi ezberleyerek karmaşık, zikzaklı bir eğri çizer. "Overfitting" riski taşır.
+
+Kullanılan Kütüphaneler:
+- sklearn.tree: Karar Ağacı Regresyon modelini kullanmak.
+- numpy: Sayısal işlemler ve veri seti oluşturma (sinüs ve gürültü).
+- matplotlib: Grafik çizimi ve görselleştirme.
+
+Kod Akışı:
+1. 0 ile 5 arasında 80 noktadan oluşan, sinüs fonksiyonu ile üretilmiş ve rastgele gürültü eklenmiş yapay bir veri seti (X, y) oluşturulur.
+2. Farklı derinliklerde iki ayrı "DecisionTreeRegressor" modeli aynı veri seti ile eğitilir.
+3. Tüm 0 ile 5 aralığında yoğun test noktaları (X_test) oluşturulur ve her iki modelden tahminler alınır.
+
+Sonuçların Yorumlanması:
+- Mavi Eğri | Max Depth = 2 | Model çok basit kalmıştır. Verideki gürültüyü görmezden gelirken, sinüs dalgasının ince detaylarını da yakalayamaz. | Underfitting |
+- Yeşil Eğri | Max Depth = 15 | Model, eğitim verisindeki her noktaya (gürültü dahil) uymak için çok karmaşık kararlar almıştır. Yeni veride başarısız olması muhtemeldir. | Overfitting |
+
+En iyi performans genellikle, eğitim ve test verisi arasında en iyi dengeyi sağlayan orta bir "max_depth" değeri seçilerek elde edilir.
