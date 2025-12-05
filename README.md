@@ -1,12 +1,11 @@
-3_1_KNN.py dosyası Scikit-learn kütüphanesinden alınan Meme Kanseri (Breast Cancer) veri setini kullanarak KNN sınıflandırma modelini uygulamaktadır.
-Amacı, tümör özelliklerine göre tümörün iyi huylu (benign) veya kötü huylu (malignant) olup olmadığını tahmin etmektir.
+3_1_KNN.py dosyasında ilk örnekte Scikit-learn kütüphanesinden alınan Breast Cancer veri setini kullanarak KNN sınıflandırma modelini uygulamaktadır. Amacı, tümör özelliklerine göre tümörün iyi huylu (benign) veya kötü huylu (malignant) olup olmadığını tahmin etmektir.
 
 Proje İçeriği:
  * Veri İncelemesi: "load_breast_cancer" veri setinin yüklenmesi ve Pandas DataFrame'e dönüştürülmesi.
- * Ön İşleme: Verilerin eğitim (train) ve test (test) kümelerine ayrılması ve StandardScaler ile ölçeklenmesi.
- * Model Eğitimi: Başlangıçta K=3 komşu kullanılarak KNN modelinin eğitilmesi.
+ * Ön İşleme: Verilerin train ve test kümelerine ayrılması ve StandardScaler ile ölçeklenmesi.
+ * Model Eğitimi: Başlangıçta K = 3 komşu kullanılarak KNN modelinin eğitilmesi.
  * Model Değerlendirmesi: Doğruluk (Accuracy) skoru ve Karmaşıklık Matrisi (Confusion Matrix) ile performansın ölçülmesi.
- * Hiperparametre Optimizasyonu:Farklı K değerleri denenerek en iyi doğruluk skorunu veren K değerinin bulunması ve görselleştirilmesi.
+ * Hiperparametre Optimizasyonu: Farklı K değerleri denenerek en iyi doğruluk skorunu veren K değerinin bulunması ve görselleştirilmesi.
 
 Kullanılan Kütüphaneler:
 - sklearn: Makine öğrenmesi algoritmaları ve araçları.
@@ -16,11 +15,11 @@ Kullanılan Kütüphaneler:
 Kod Akışı:
 1. Gerekli tüm kütüphaneler içeri aktarılır ve "load_breast_cancer" fonksiyonu ile veri seti yüklenir.
 2. Özellikler (X) ve hedef değişken (y) ayrıldıktan sonra veri, modelin daha iyi performans göstermesi için ölçeklenir.
-3. K=3 komşu sayısıyla bir KNN modeli oluşturulur ve eğitim verisi ile eğitilir.
+3. K = 3 komşu sayısıyla bir KNN modeli oluşturulur ve eğitim verisi ile eğitilir.
 4. Modelin performansını doğruluk skoru ve karmaşıklık matrisi ile değerlendirilir.
 5. K hiperparametresinin 1 ile 20 arasındaki değerleri denenerek en iyi K değeri bulunur ve sonuçlar grafiklenir.
 
-3_1_KNN.py dosyası regresyon örneğinde KNN algoritmasını kullanarak yapay olarak oluşturulmuş gürültülü bir sinüs dalgası üzerindeki tahmin yeteneğini incelemektedir. Temel odak noktası, farklı ağırlıklandırma (weights) parametrelerinin modelin tahmin eğrisi üzerindeki etkisini görselleştirmektir.
+3_1_KNN.py dosyasında ikinci yani regresyon örneğinde KNN algoritmasını kullanarak yapay olarak oluşturulmuş gürültülü bir sinüs dalgası üzerindeki tahmin yeteneğini incelemektedir. Temel odak noktası, farklı ağırlıklandırma (weights) parametrelerinin modelin tahmin eğrisi üzerindeki etkisini görselleştirmektir.
 
 Proje İçeriği:
 * Veri Seti: 0 ile 5 arasında 40 adet noktadan oluşan, sinüs fonksiyonu ile üretilmiş ve rastgele gürültü eklenmiş yapay bir veri seti kullanılır.
@@ -37,9 +36,9 @@ Kullanılan Kütüphaneler:
   
 Kod Akışı:
 1. X değerleri (0 ile 5 arasında 40 nokta) oluşturulur ve y değerleri (y = sin(X)) hesaplanır. Daha sonra gerçekçi simülasyon için her 5. noktaya gürültü eklenir.
-2. Modelin 0 ile 5 aralığındaki tüm tahmin eğrisini detaylıca çizebilmek için yoğun bir test aralığı ("T") oluşturulur.
+2. Modelin 0 ile 5 aralığındaki tüm tahmin eğrisini detaylıca çizebilmek için yoğun bir test aralığı (T) oluşturulur.
 3. Bir döngü ile iki farklı ağırlıklandırma yöntemi denenir. Her döngüde model eğitilir ve test noktaları üzerinde tahmin yapılır.
-4. "matplotlib" kullanılarak her bir ağırlıklandırma yönteminin tahmin eğrisi, orijinal gürültülü veri noktaları ile birlikte ayrı alt grafiklerde ("subplot") gösterilir.
+4. "matplotlib" kullanılarak her bir ağırlıklandırma yönteminin tahmin eğrisi, orijinal gürültülü veri noktaları ile birlikte ayrı alt grafiklerde (subplot) gösterilir.
   * "uniform": Tahmin eğrisi, komşuların ortalamasını aldığı için daha basamaklı görünme eğilimindedir.
   * "distance": Daha yakın komşular daha fazla etkili olduğu için, tahmin eğrisi genellikle orijinal verilere daha yakındır.
 Bu karşılaştırma, KNN Regresyon algoritmasında mesafe bazlı ağırlıklandırmanın (distance) genellikle temel sinyal eğilimini takip etmede, basit ortalama ağırlıklandırmaya (uniform) kıyasla daha iyi ve daha az basamaklı tahmin eğrileri ürettiğini gösterir. Bu, makine öğrenmesinde hiperparametre seçiminin önemini vurgular.
@@ -50,7 +49,7 @@ Bu karşılaştırma, KNN Regresyon algoritmasında mesafe bazlı ağırlıkland
 
 Proje İçeriği:
 * Veri Hazırlama: Iris veri setinin %80'i eğitim, %20'si test için ayrılmıştır.
-* Model Eğitimi: Gini katsayısı (criterion="gini") ve maksimum 5 derinlik (max_depth=5) ile bir DecisionTreeClassifier eğitilmiştir.
+* Model Eğitimi: Gini katsayısı (criterion = "gini") ve maksimum 5 derinlik (max_depth = 5) ile bir DecisionTreeClassifier eğitilmiştir.
 * Değerlendirme: Doğruluk skoru ve Karmaşıklık Matrisi ile model performansı ölçülmüştür.
 * Ağaç Görselleştirme: Eğitilmiş Karar Ağacının yapısı ve aldığı kararlar görselleştirilmiştir.
 
@@ -67,7 +66,6 @@ Kod Akışı:
 3. Modelin, daha önce görmediği test verisi üzerindeki performansı ölçülür.
 4. Eğitilen modelin iç yapısı grafiksel olarak çizilerek modelin karar verme mantığı anlaşılır hale getirilir. Her düğümdeki kutu, karar kuralını, örnek sayısını ve sınıf dağılımını gösterir.
 5. Modelin nihai kararlarında hangi özelliklerin en kritik olduğunu gösterir.
-   
 Bu çıktıya göre, modelin Iris türünü sınıflandırmada en çok petal length ve petal width özelliklerine güvendiği anlaşılır.
 
 3_2_DecisionTree.py dosyası, Iris veri setini kullanarak bir Decision Tree sınıflandırıcısının karar sınırlarını incelemektedir. Iris veri setindeki dört özelliğin tüm olası ikişerli kombinasyonları için modeller eğitilir ve karar bölgeleri görselleştirilir. Modelin, farklı özellik çiftlerini kullandığında sınıflandırma uzayını nasıl böldüğünü ve hangi özelliklerin en net ayrımı sağladığını görsel olarak belirlemektir. Karar Ağacının temel özelliği olan eksenlere paralel karar sınırları bu grafikte açıkça görülür.
@@ -82,7 +80,7 @@ Kullanılan Kütüphaneler:
 Kod Akışı:
 1. Iris veri setinde dört özellik bulunur: Sepal Length (SL), Sepal Width (SW), Petal Length (PL) ve Petal Width (PW). Kod, bu 4 özelliğin tüm olası ikili kombinasyonunu dener.
 2. Bir döngü, 6 özellik çiftini de dolaşır. Her döngüde:
-    * Veri, o anki iki özellik kullanılarak filtre edilir (X = iris.data[:, pair]).
+    * Veri, o anki iki özellik kullanılarak filtre edilir (X = iris.data[:, pair).
     * Yeni bir DecisionTreeClassifier eğitilir (clf.fit(X, y)).
 3. Her bir modelin sonucu, 2x3 düzeninde bir alt grafiğe çizilir:
     * Renk Alanları: Modelin ilgili bölgede hangi sınıfı tahmin edeceğini gösterir.
