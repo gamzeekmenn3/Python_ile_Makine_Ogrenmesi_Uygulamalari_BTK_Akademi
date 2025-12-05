@@ -89,3 +89,22 @@ Kod Akışı:
     * Noktalar: Orijinal veri noktalarıdır ve modelin ne kadarının doğru bölgelerde yer aldığını gösterir.
 4. Grafikler incelendiğinde, genellikle Petal Length (PL) ve Petal Width (PW) özelliklerinin kullanıldığı grafiklerde (sağ alt köşe), Karar Sınırlarının en basit ve en net olduğu görülür. Bu, bu iki özelliğin Iris türlerini sınıflandırmak için en güçlü ayırıcılar olduğunu doğrular.
 
+3_2_DecisionTree.py dosyası, Scikit-learn kütüphanesinden alınan Diyabet veri setini kullanarak bir Decision Tree Regressor modeli oluşturmayı ve bu modelin performansını Ortalama Karesel Hata (MSE) ve Karesel Ortalama Hata Kökü (RMSE) metrikleriyle değerlendirmeyi amaçlamaktadır. Modelin temel amacı, hastaların tıbbi özelliklerine (BMI, kan basıncı, vb.) dayanarak diyabet hastalığının ilerleme seviyesini tahmin etmek. Bu, sayısal (sürekli) bir değer tahmin etme problemi olduğu için bir Regresyon görevidir.
+
+Kullanılan Kütüphaneler:
+- sklearn.datasets: Diyabet veri setini yüklemek.
+- sklearn.tree: Karar Ağacı Regresyon modelini (DecisionTreeRegressor) kullanmak.
+- sklearn.model_selection: Veriyi eğitim ve test kümelerine ayırmak. 
+- sklearn.metrics: Regresyon performansını değerlendirmek (mean_squared_error).
+- numpy: Matematiksel işlemler (özellikle karekök alma için).
+
+Kod Akışı:
+1. Diyabet veri setindeki 10 adet özellik (X) ve hedef ilerleme değeri (y) ayrılır. Veri setinin %20'si test için ayrılmıştır.
+2. Model oluşturulur ve eğitim verisi ile eğitilir. Regresyon Ağaçları, dallanma kararlarını alırken her düğümdeki varyansı (veya MSE'yi) en aza indirmeyi hedefler.
+3. Eğitilen model, test verisi üzerinde tahminler yapar ve bu tahminlerin kalitesi hata metrikleri ile ölçülür.
+    * Hata Metrikleri:
+        - Ortalama Karesel Hata (Mean Squared Error - MSE): Hata paylarının karesinin ortalamasını alır. Büyük hataları daha çok cezalandırır. Modelin ne kadar              başarılı olduğunu sayısal olarak gösterir, ancak hedef değişkenin birimiyle aynı değildir.
+        - Karesel Ortalama Hata Kökü (Root Mean Squared Error - RMSE): MSE'nin kareköküdür. En yaygın kullanılan regresyon metriğidir. Hata birimi, tahmin edilen            değerin (hastalık ilerlemesi) birimiyle aynıdır, bu da sonucu yorumlamayı kolaylaştırır. Değer ne kadar düşükse, model o kadar iyidir.
+
+Elde edilen RMSE değeri, modelin yaptığı tahminlerin, gerçek hastalık ilerleme seviyelerinden ortalama olarak ne kadar sapma gösterdiğini ifade eder. Bu değer, modeli diğer regresyon algoritmalarıyla (örneğin Lineer Regresyon) karşılaştırmak için kullanılacak temel ölçüttür.
+
