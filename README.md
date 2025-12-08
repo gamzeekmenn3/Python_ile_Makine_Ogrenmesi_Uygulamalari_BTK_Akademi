@@ -159,7 +159,7 @@ Kod Akışı:
 1. Veri setindeki özellikler (`X`) ve hedef konut fiyatı değerleri (`y`) ayrılır. Veri setinin %20'si test için ayrılmıştır.
 2. Rastgele Orman Regresyonu modeli oluşturulur ve eğitim verisi ile eğitilir. Bu model, birçok Karar Ağacının tahminlerini toplayarak (ortalama alarak) daha genellenebilir ve doğru sonuçlar üretir.
 3. Model, test verisi üzerinde tahminler yapar ve bu tahminlerin kalitesi "RMSE" ile ölçülür.
-    # Hata Metriği: Karesel Ortalama Hata Kökü (RMSE): 
+    * Hata Metriği: Karesel Ortalama Hata Kökü (RMSE): 
       - RMSE, modelin tahminlerinin gerçek konut fiyatlarından ortalama olarak ne kadar sapma gösterdiğini hedef değişkenin birimiyle aynı birimde ifade eder.
       - Daha düşük RMSE, modelin konut fiyatlarını o kadar doğru tahmin ettiği anlamına gelir.
 Elde edilen RMSE değeri, modelin performansını ölçmek ve modeli diğer regresyon algoritmalarıyla karşılaştırmak için kullanılacak temel ölçüttür. Bu değer, optimizasyon (hiperparametre ayarlaması) yoluyla düşürülmeye çalışılmalıdır.
