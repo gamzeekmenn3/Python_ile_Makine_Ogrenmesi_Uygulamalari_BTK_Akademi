@@ -145,3 +145,21 @@ Kod Akışı:
 
 * Accuracy Skoru: Elde edilen doğruluk değeri, modelin test setindeki yüzlerin yüzde kaçını doğru kişiyle eşleştirdiğini gösterir. Rastgele Orman gibi algoritmalarla yüz tanıma görevinde genellikle oldukça yüksek doğruluk skorları elde edilir.
 * n_estimators: Ağaç sayısının artırılması performansı genellikle artırır ancak eğitim süresini uzatır. Bu modelde 100 ağaç optimum dengeyi sağlamıştır.
+
+3_3_RandomForest.py dosyası, California Housing veri setini kullanarak bir Random Forest Regressor modeli oluşturmayı ve bu modelin performansını Karesel Ortalama Hata Kökü (RMSE) metriğiyle değerlendirmeyi amaçlamaktadır. Modelin temel amacı, bir konut bölgesinin medyan hane geliri, evlerin yaşı, ortalama oda sayısı gibi özelliklerine dayanarak, o bölgedeki konut fiyatlarının medyan değerini tahmin etmektir. Bu, Regresyon problemine bir topluluk (ensemble) öğrenme çözümü uygulamaktır.
+
+Kullanılan Kütüphaneler:
+- sklearn.datasets: California Housing veri setini yüklemek.
+- sklearn.ensemble: Rastgele Orman Regresyon modelini kullanmak.
+- sklearn.model_selection: Veriyi eğitim ve test kümelerine ayırmak. 
+- sklearn.metrics: Regresyon performansını değerlendirmek (mean_squared_error).
+- numpy: Matematiksel işlemler (özellikle karekök alma). 
+
+Kod Akışı:
+1. Veri setindeki özellikler (`X`) ve hedef konut fiyatı değerleri (`y`) ayrılır. Veri setinin %20'si test için ayrılmıştır.
+2. Rastgele Orman Regresyonu modeli oluşturulur ve eğitim verisi ile eğitilir. Bu model, birçok Karar Ağacının tahminlerini toplayarak (ortalama alarak) daha genellenebilir ve doğru sonuçlar üretir.
+3. Model, test verisi üzerinde tahminler yapar ve bu tahminlerin kalitesi "RMSE" ile ölçülür.
+    # Hata Metriği: Karesel Ortalama Hata Kökü (RMSE): 
+      - RMSE, modelin tahminlerinin gerçek konut fiyatlarından ortalama olarak ne kadar sapma gösterdiğini hedef değişkenin birimiyle aynı birimde ifade eder.
+      - Daha düşük RMSE, modelin konut fiyatlarını o kadar doğru tahmin ettiği anlamına gelir.
+Elde edilen RMSE değeri, modelin performansını ölçmek ve modeli diğer regresyon algoritmalarıyla karşılaştırmak için kullanılacak temel ölçüttür. Bu değer, optimizasyon (hiperparametre ayarlaması) yoluyla düşürülmeye çalışılmalıdır.
