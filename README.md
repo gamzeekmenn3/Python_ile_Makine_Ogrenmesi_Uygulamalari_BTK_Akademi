@@ -163,3 +163,25 @@ Kod Akışı:
       - RMSE, modelin tahminlerinin gerçek konut fiyatlarından ortalama olarak ne kadar sapma gösterdiğini hedef değişkenin birimiyle aynı birimde ifade eder.
       - Daha düşük RMSE, modelin konut fiyatlarını o kadar doğru tahmin ettiği anlamına gelir.
 Elde edilen RMSE değeri, modelin performansını ölçmek ve modeli diğer regresyon algoritmalarıyla karşılaştırmak için kullanılacak temel ölçüttür. Bu değer, optimizasyon (hiperparametre ayarlaması) yoluyla düşürülmeye çalışılmalıdır.
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+3_4_LogisticRegression.py dosyası, UCI Kalp Hastalığı (Heart Disease) veri setini kullanarak bir Logistic Regression sınıflandırma modeli oluşturmayı amaçlamaktadır. Model, hastaların tıbbi özelliklerine dayanarak kalp hastalığı riskini tahmin etmektedir. Modelin temel amacı, bir hastanın tıbbi verilerine (yaş, cinsiyet, kolesterol, kan basıncı vb.) dayanarak kalp hastalığı varlığını (ikili sınıflandırma) tahmin etmektir. Lojistik Regresyon, tahminlerini 0 ile 1 arasında bir olasılık olarak sunar.
+
+Kullanılan Kütüphaneler:
+- ucimlrepo: UCI Machine Learning Repository'den veri setini indirmek.
+- pandas: Veri manipülasyonu ve eksik değer yönetimi.
+- sklearn.linear_model: Lojistik Regresyon modelini kullanmak.
+- sklearn.model_selection: Veriyi eğitim ve test kümelerine ayırmak.
+
+Kod Akışı:
+1. Veri seti, UCI deposundan doğrudan çekilir ve Pandas DataFrame'e dönüştürülür. Modelin düzgün çalışması için eksik değerler (`NaN`) içeren satırlar veri setinden silinir (`dropna`).
+2. Veri setinin %10'u test için ayrılmıştır (`test_size = 0.1`).
+3. Model, L2 regülarizasyonu kullanılarak eğitilir. Regülarizasyon, modelin aşırı karmaşıklaşmasını (overfitting) engelleyerek genelleme yeteneğini artırmayı hedefler.
+4. Modelin, test verisi üzerindeki performansı Accuracy skoru ile ölçülür.
+
+  * Accuracy Skoru: Elde edilen doğruluk değeri, modelin test setindeki hastaların yüzde kaçını doğru şekilde sınıflandırdığını (kalp hastası olup olmadığını doğru tahmin etme) gösterir.
+  * Regülarizasyon: Modelde kullanılan `penalty = "l2"` ve `C = 1` hiperparametreleri, modelin katsayılarının çok büyük değerler almasını engelleyerek modelin genelleme yeteneğini korumaya yardımcı olur.
+  * Lojistik Regresyon bu tür ikili sınıflandırma (binary classification) problemleri için güçlü, basit ve yorumlanması kolay bir başlangıç modelidir.
+
+  
