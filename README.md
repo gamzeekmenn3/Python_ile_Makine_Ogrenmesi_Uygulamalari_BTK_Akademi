@@ -184,4 +184,27 @@ Kod Akışı:
   * Regülarizasyon: Modelde kullanılan `penalty = "l2"` ve `C = 1` hiperparametreleri, modelin katsayılarının çok büyük değerler almasını engelleyerek modelin genelleme yeteneğini korumaya yardımcı olur.
   * Lojistik Regresyon bu tür ikili sınıflandırma (binary classification) problemleri için güçlü, basit ve yorumlanması kolay bir başlangıç modelidir.
 
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+3_5_SVM.py dosyası, Digits veri setini kullanarak bir Support Vector Classifier - SVC modeli oluşturmayı, eğitip değerlendirmeyi amaçlamaktadır. Model, 8X8 piksellik görüntü vektörlerine dayanarak el yazısı rakamları 0’dan 9’a) tanır. Modelin temel amacı, düşük çözünürlüklü görüntü verilerinden rakamları doğru bir şekilde tanımaktır. Bu bir çoklu sınıflandırma (multi-class classification) problemidir.
+
+Kullanılan Kütüphaneler:
+- sklearn.datasets: Digits veri setini yüklemek. 
+- sklearn.svm: Destek Vektör Sınıflandırıcı (SVC) modelini kullanmak. 
+- sklearn.model_selection: Veriyi eğitim ve test kümelerine ayırmak.
+- sklearn.metrics: Model performansını değerlendirmek (`classification_report`). 
+- matplotlib: Görüntüleri görselleştirmek.
+
+Kod Akışı:
+1. Digits veri seti, 8x8 (yani 64 piksel) boyutunda görüntüler içerir. Model bu 64 piksel değerini özellik olarak kullanır.
+2. 8x8 matris şeklindeki görüntüler 64 boyutlu vektörlere dönüştürülmüş (`digits.data`) olarak kullanılır. Veri setinin %20'si test için ayrılır.
+3. Model, doğrusal (linear) bir karar sınırı oluşturmayı hedefleyen bir çekirdek (`kernel`) ile eğitilir. SVM'nin temel amacı, sınıflar arasındaki en büyük marjı bularak optimum ayırma hiperdüzlemini oluşturmaktır.
+4. Modelin, test verisi üzerindeki performansı Sınıflandırma Raporu ile detaylıca incelenir.
+
+  * Sınıflandırma Raporu çıktısı, modelin her bir rakam (sınıf) için Precision, Recall ve F1-Score metriklerini gösterir.
+      * Yüksek Precision, modelin bir rakamı X olarak tahmin ettiğinde ne kadar sıklıkla haklı olduğunu gösterir.
+      * Yüksek Recall, gerçekte X olan rakamların ne kadarının model tarafından doğru yakalandığını gösterir.
+  * kernel = "linear": Doğrusal çekirdek, SVM'nin 64 boyutlu uzayda rakamları ayırmak için hiperdüzlem kullandığı anlamına gelir. Bu veri seti için basit bir doğrusal çekirdek genellikle yüksek doğruluk sağlar.
+  * Genel Doğruluk (Accuracy): Raporun altındaki makro/ağırlıklı ortalamalar, modelin tüm rakamlar üzerindeki genel başarı seviyesini özetler.
+
   
