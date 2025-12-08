@@ -125,3 +125,23 @@ Sonuçların Yorumlanması:
 - Yeşil Eğri | Max Depth = 15 | Model, eğitim verisindeki her noktaya (gürültü dahil) uymak için çok karmaşık kararlar almıştır. Yeni veride başarısız olması muhtemeldir. | Overfitting |
 
 En iyi performans genellikle, eğitim ve test verisi arasında en iyi dengeyi sağlayan orta bir "max_depth" değeri seçilerek elde edilir.
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+ 3_3_RandomForest.py dosyası, Olivetti Faces veri setini kullanarak bir Random Forest Classifier modeli oluşturmayı ve bu modelin performansını yüz tanıma görevinde değerlendirmeyi amaçlamaktadır. Modelin temel amacı, bir yüz görüntüsünün hangi 40 kişiden birine ait olduğunu tahmin etmektir. Bu, yüksek boyutlu özelliklere (piksel değerleri) sahip bir çoklu sınıflandırma (multi-class classification) problemidir.
+
+Kullanılan Kütüphaneler:
+- sklearn.datasets: Olivetti Faces veri setini yüklemek.
+- sklearn.ensemble: Rastgele Orman modelini (RandomForestClassifier) kullanmak.
+- sklearn.model_selection: Veriyi eğitim ve test kümelerine ayırmak.
+- sklearn.metrics: Model performansını değerlendirmek (Accuracy)
+- matplotlib: Görüntüleri görselleştirmek. 
+
+Kod Akışı:
+1. Olivetti veri seti 40 farklı kişiye ait toplam 400 adet 64x64 piksel (4096 özellik) gri tonlamalı görüntü içerir.
+2. Görüntüler zaten 4096 boyutlu vektörler halinde düzleştirilmiştir (oli.data). Veri seti %20'si test, %80'i eğitim için ayrılır.
+3. Rastgele Orman (RF), tahmin yapmak için 100 farklı karar ağacının sonuçlarını bir araya getirir. Bu ensemble learning yöntemi, tek bir karar ağacına göre daha istikrarlı ve doğru sonuçlar verir.
+4. Model, test setindeki yüz görüntülerinin hangi kişiye ait olduğunu tahmin eder ve bu tahminlerin doğruluğu ölçülür.
+
+* Accuracy Skoru: Elde edilen doğruluk değeri, modelin test setindeki yüzlerin yüzde kaçını doğru kişiyle eşleştirdiğini gösterir. Rastgele Orman gibi algoritmalarla yüz tanıma görevinde genellikle oldukça yüksek doğruluk skorları elde edilir.
+* n_estimators: Ağaç sayısının artırılması performansı genellikle artırır ancak eğitim süresini uzatır. Bu modelde 100 ağaç optimum dengeyi sağlamıştır.
