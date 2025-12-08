@@ -207,4 +207,24 @@ Kod Akışı:
   * kernel = "linear": Doğrusal çekirdek, SVM'nin 64 boyutlu uzayda rakamları ayırmak için hiperdüzlem kullandığı anlamına gelir. Bu veri seti için basit bir doğrusal çekirdek genellikle yüksek doğruluk sağlar.
   * Genel Doğruluk (Accuracy): Raporun altındaki makro/ağırlıklı ortalamalar, modelin tüm rakamlar üzerindeki genel başarı seviyesini özetler.
 
-  
+  ---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+3_6_NaiveBayes.py dosyası, Iris veri setini kullanarak bir Gaussian Naive Bayes (GNB) sınıflandırma modeli oluşturmayı ve bu modelin performansını detaylı bir sınıflandırma raporuyla değerlendirmeyi amaçlamaktadır. Modelin temel amacı, bir çiçeğin taç ve çanak yaprağı ölçümleri gibi özelliklerine bakarak hangi Iris türüne (Setosa, Versicolor, Virginica) ait olduğunu tahmin etmektir. Naive Bayes, Basit Bayes Teoremi'ne dayanır ve özelliklerin birbirinden bağımsız olduğunu varsayar.
+
+Kullanılan Kütüphaneler:
+- sklearn.datasets: Iris veri setini yüklemek. 
+- sklearn.naive_bayes: Gaussian Naive Bayes modelini kullanmak. 
+- sklearn.model_selection: Veriyi eğitim ve test kümelerine ayırmak.
+- sklearn.metrics: Model performansını değerlendirmek (`classification_report`). 
+
+Kod Akışı:
+1. Iris veri setindeki özellikler (`X`) ve hedef sınıflar (`y`) ayrılır. Veri setinin %20'si test için ayrılmıştır.
+2. Model, Gaussian (Normal) dağılım varsayımı ile eğitilir. Bu model, her sınıf için her bir özelliğin ortalama ve standart sapma değerlerini hesaplayarak olasılık dağılımlarını öğrenir.
+3. Model, test verisi üzerinde tahminler yapar ve bu tahminlerin kalitesi Sınıflandırma Raporu ile detaylıca incelenir.
+
+Sınıflandırma Raporu çıktısı, modelin her bir sınıf (Iris türü) üzerindeki performansını özetler:
+  * Precision: Modelin bir türü X olarak tahmin ettiğinde ne kadar haklı olduğunu gösterir.
+  * Recall: Gerçekte X olan türlerin ne kadarının model tarafından yakalandığını gösterir.
+  * F1-Score: Precision ve Recall'un denge ölçüsüdür.
+  * Accuracy: Genel başarı skoru.
+Naive Bayes, basitliği ve yüksek hesaplama hızı nedeniyle, özellikle özelliklerin bağımsız olduğu (veya bağımsızlığa yakın olduğu) durumlarda çok etkili bir başlangıç modelidir.
