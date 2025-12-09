@@ -231,21 +231,46 @@ Naive Bayes, basitliği ve yüksek hesaplama hızı nedeniyle, özellikle özell
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------
 
-3_7_ClassificationModelComparison.py dosyası, Scikit-learn kütüphanesinin sentetik veri oluşturma fonksiyonlarını kullanarak, farklı geometrik ve karmaşıklık seviyelerine sahip ikili sınıflandırma veri setlerini (`make_classification`, `make_moons`, `make_circles`) oluşturmayı ve Matplotlib ile görselleştirmeyi amaçlamaktadır. Bu görselleştirme, özellikle doğrusal olmayan (non-linear) sınıflandırma algoritmalarının (örneğin, Kernel SVM veya Karar Ağaçları) performansını test etmek için ideal olan veri yapılarının karşılaştırmalı bir incelemesini sunar.
+3_7_ClassificationModelComparison.py dosyası, farklı geometrik yapıdaki üç sentetik veri seti üzerinde beş temel makine öğrenmesi sınıflandırma algoritmasının performansını, karar sınırlarını ve doğruluk skorlarını görsel olarak karşılaştırmayı amaçlamaktadır. Temel amacımız, her bir algoritmanın (doğrusal, doğrusal olmayan, topluluk tabanlı) farklı veri yapılarına nasıl tepki verdiğini ve hangi durumlarda doğrusal olmayan sınırlar oluşturarak daha iyi genelleme sağladığını görsel bir matris üzerinde göstermektir.
 
 Kullanılan Kütüphaneler:
-- sklearn.datasets: Sentetik ikili sınıflandırma veri setlerini oluşturmak. 
-- matplotlib: Grafik çizimi ve görselleştirme.
-- numpy: Sayısal işlemler ve rastgele gürültü eklemek.
+- sklearn.datasets: Sentetik veri setlerini (küme, hilal, daire) oluşturmak.
+- sklearn.neighbors: K En Yakın Komşu (`KNeighborsClassifier`).
+- sklearn.svm: Destek Vektör Makineleri (`SVC`). 
+- sklearn.tree / sklearn.ensemble: Karar Ağaçları ve Rastgele Orman.
+- sklearn.naive_bayes: Gaussian Naive Bayes. 
+- sklearn.preprocessing: Veri ölçekleme (`StandardScaler`).
+- sklearn.pipeline: İşlem hatları (`make_pipeline`) oluşturmak.
+- sklearn.inspection: Karar sınırlarını çizmek (`DecisionBoundaryDisplay`).
+
+Veri Setleri ve Yapıları:
+* Küme Tipi (`make_classification`): Doğrusal bir sınırla ayrılabilir, ancak rastgele gürültü eklenmiştir.
+* Hilal Tipi (`make_moons`): Doğrusal olmayan bir sınır gerektirir (örneğin, SVM veya KNN).
+* Daire Tipi (`make_circles`): İç içe yapısından dolayı güçlü doğrusal olmayan yeteneklere sahip modeller gerektirir.
+
+Karşılaştırılan Algoritmalar: 
+**Nearest Neighbors (KNN)**: Doğrusal Olmayan | Mesafeye dayalıdır. Ölçeklemeye karşı hassastır.
+**Linear SVM**: Doğrusal/Çekirdek | Doğrusal olmayan bir çekirdek (`RBF`) ile test edilmiştir.
+**Decision Tree**: Doğrusal Olmayan | Eksenlere paralel, kademeli sınırlar oluşturur. 
+**Random Forest**: Topluluk (Ensemble) | Birçok Karar Ağacının ortalamasıyla daha düzgün sınırlar oluşturur.
+**Naive Bayes**: Olasılıksal | Özelliklerin normal dağıldığını varsayar. 
 
 Kod Akışı:
-1. Üç ana veri seti, sınıflandırma zorlukları göz önünde bulundurularak oluşturulmuştur:
-  * Küme Tipi (`make_classification`): Doğrusal olarak ayrılabilen (biraz gürültü eklenmiş) iki temel küme. Doğrusal modeller (Lojistik Regresyon, Lineer SVM) bu set üzerinde iyi performans gösterebilir.
-  Hilal Tipi (`make_moons`): İki hilal şeklinde iç içe geçmiş, doğrusal olarak ayrılamayan sınıflar.
-  * Daire Tipi (`make_circles`): İç içe geçmiş iki daire şeklinde, merkezden simetrik ve doğrusal olarak ayrılamayan sınıflar.
-2. Oluşturulan bu üç veri seti, tek bir figürde 3x1 düzeninde alt grafiklere çizilir. Bu görseller, makine öğrenmesi modellerini seçerken verinin yapısını anlamanın ne kadar önemli olduğunu gösterir:
-  * 1. Grafik (Küme): Basit algoritmalar yeterlidir.
-  * 2. & 3. Grafikler (Hilal & Daire): Başarılı sınıflandırma için doğrusal olmayan (non-linear) özellik dönüşümleri gereklidir (örneğin, SVM'de RBF çekirdeği veya derin Karar Ağaçları).
+1. Tüm algoritmaların adil bir şekilde karşılaştırılması ve özellikle mesafe tabanlı algoritmaların doğru çalışması için, StandardScaler ve sınıflandırıcı bir işlem hattında (`make_pipeline`) zincirlenmiştir.
+2. Kodun ana çıktısı, 3 satır (veri setleri) ve 6 sütundan (giriş verisi + 5 model) oluşan büyük bir Matplotlib figürüdür.
+
+| | **Giriş Verisi** | **KNN** | **SVM** | **Decision Tree** | **Random Forest** | **Naive Bayes** |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| **Satır 1** | Küme Tipi | Karar Sınırı | Karar Sınırı | Karar Sınırı | Karar Sınırı | Karar Sınırı |
+| **Satır 2** | Hilal Tipi | Karar Sınırı | Karar Sınırı | Karar Sınırı | Karar Sınırı | Karar Sınırı |
+| **Satır 3** | Daire Tipi | Karar Sınırı | Karar Sınırı | Karar Sınırı | Karar Sınırı | Karar Sınırı |
+
+Her bir alt grafik, modelin test verisi üzerindeki doğruluk skorunu içerir ve renkli alanlar, modelin hangi bölgeyi hangi sınıfa atadığını gösteren karar sınırlarını temsil eder.
+
+- Doğrusal Veri: Çoğu model (basit olanlar dahil) yüksek doğruluk skorları elde edecektir.
+- Hilal/Daire Veri: Lineer SVM ve Gaussian Naive Bayes gibi doğrusal modellerin, Hilal ve Daire setlerinde düşük performans göstermesi ve düz/basit sınırlar çizmesi beklenir.
+- Doğrusal Olmayan Başarı: Random Forest ve KNN gibi güçlü doğrusal olmayan modellerin, Daire ve Hilal setlerinde yüksek skorlar ve karmaşık, veri yapısına uygun sınırlar çizmesi beklenir.
+- Karar Ağacı Sınırları: Karar Ağacı modelleri, her zaman eksenlere paralel, basamaklı sınırlar oluşturacaktır.
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------
 
