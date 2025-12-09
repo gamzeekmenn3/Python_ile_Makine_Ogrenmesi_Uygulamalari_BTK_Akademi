@@ -274,3 +274,32 @@ Her bir alt grafik, modelin test verisi üzerindeki doğruluk skorunu içerir ve
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------
 
+3_8_GozetimliOgrenmeDurumCalismasi.py dosyası, bir sınıflandırma problemi için beş farklı makine öğrenmesi algoritmasını uygulayan, hiperparametre optimizasyonu (`GridSearchCV`) yapan, modellerin performanslarını çapraz doğrulama skorlarına göre karşılaştıran ve son olarak bir Topluluk Oylaması (Voting Classifier) ile nihai tahmini yapan kapsamlı bir iş akışını (pipeline) göstermektedir. Temel amaç, aynı sentetik veri seti üzerinde farklı algoritmaların (Doğrusal, Çekirdekli, Ağaç Tabanlı, Topluluk) potansiyelini keşfetmek ve en iyi sonuçları elde etmek için en güçlü modelleri birleştirerek Topluluk Öğrenmesi yöntemini uygulamaktır.
+
+Kullanılan Kütüphaneler:
+- sklearn.model_selection: GridSearchCV, StratifiedKFold (Optimizasyon ve Çapraz Doğrulama). 
+- sklearn.linear_model: LogisticRegression
+- sklearn.svm, sklearn.neighbors: SVC, KNeighborsClassifier
+- sklearn.ensemble: RandomForestClassifier, VotingClassifier (Topluluk Öğrenmesi).
+- pandas, numpy: Veri manipülasyonu ve sentetik veri oluşturma. 
+- seaborn, matplotlib: Sonuçları görselleştirme.
+
+Kod Akışı:
+1. Kod, Titanic veri setinin boyutlarını taklit eden, ancak tamamen rastgele özelliklere sahip sentetik bir DataFrame oluşturur.
+  * Özellikler: `Pclass`, `Age`, `Fare`, `Sex_male`.
+  * Hedef: `Survived` (0 veya 1).
+  * Veri, %67 eğitim (`X_train`) ve %33 test (`X_test`) kümelerine ayrılır.
+2. Optimizasyondan önce, bir temel modelin (Lojistik Regresyon) performansına bakılarak başlangıç seviyesi belirlenir.
+3. Beş farklı sınıflandırıcı (`DecisionTreeClassifier`, `SVC`, `RandomForestClassifier`, `LogisticRegression`, `KNeighborsClassifier`) ve her biri için denenecek geniş hiperparametre aralıkları tanımlanır.
+* Örnek Parametreler:
+   * SVC: `kernel`, `gamma`, `C` (Çekirdek tipi ve regülarizasyon kuvveti).
+   * KNN: `n_neighbors`, `weights`, `metric` (Komşu sayısı, ağırlıklandırma ve mesafe metrikleri).
+   * RandomForest: `n_estimators`, `max_features`, `min_samples_split`.
+4. Bu, projenin en kritik adımıdır. Her model, `GridSearchCV` kullanılarak en uygun hiperparametreleri bulmak üzere eğitilir.
+* Amaç: Her model için olası tüm hiperparametre kombinasyonlarını deneyerek çapraz doğrulama skorunu maksimize etmektir.
+5. Tüm modellerin çapraz doğrulama sırasında elde ettiği en iyi skorlar, bir çubuk grafikte gösterilir. Bu grafik, hiperparametreleri optimize edilmiş modellerin karşılaştırmalı performansını sunar.
+6. En iyi performansı gösteren modeller (DT, SVC, RF, LR) birleştirilerek nihai topluluk modeli oluşturulur.
+* `voting = "soft"`: Modellerin tahminlerinin sadece sınıf etiketi değil, aynı zamanda tahmin olasılıkları kullanılarak ağırlıklandırılması (yumuşak oylama) sağlanır.  Bu yöntem, tek tek modellerin zayıf yönlerini dengeleyerek genellikle genel sistem performansını artırır.
+* Nihai Skor: `accuracy_score(votingC.predict(X_test), y_test)` ile Topluluk Sınıflandırıcısının test kümesi üzerindeki final performansı ölçülür.
+
+Bu iş akışı, makine öğrenmesi projelerinde **model seçimi** ve **hiperparametre ayarlaması** süreçlerinin ne kadar önemli olduğunu göstermenin yanı sıra, farklı algoritmaların sonuçlarını birleştirerek modelin genelleme yeteneğini ve doğruluğunu nasıl artırabileceğimizi gösterir.
