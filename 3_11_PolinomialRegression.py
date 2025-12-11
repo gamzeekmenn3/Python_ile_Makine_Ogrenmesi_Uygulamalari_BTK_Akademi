@@ -5,7 +5,7 @@ from sklearn.preprocessing import PolynomialFeatures
 from sklearn.linear_model import LinearRegression
 
 X = 4 * np.random.rand(100, 1)
-y= 2 + 3 * X ** 2 + 2 * np.random.rand(100, 1)
+y = 2 + 3 * X ** 2 + 2 * np.random.rand(100, 1)
 
 # plt.scatter(X, y)
 
