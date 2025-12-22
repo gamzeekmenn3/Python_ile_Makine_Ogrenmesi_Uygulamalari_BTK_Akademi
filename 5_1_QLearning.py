@@ -67,3 +67,25 @@ print("Qtable after training: ")
 print(qtable)
 
 plt.bar(range(episodes), outcomes)
+
+# test
+episodes = 1000  # episode
+nb_success = 0
+
+for _ in range(episodes):
+    state, _ = environment.reset()
+    done = False
+    
+    while not done:  # Ajan basarili olana kadar state icerisinde hareket et (action sec ve uygula)
+        if np.max(qtable[state]) > 0:
+            action = np.argmax(qtable[state])
+        else:
+            action = environment.action_space.sample()
+
+        new_state, reward, terminated, truncated, info = environment.step(action)
+        done = terminated or truncated
+        state = new_state
+
+        nb_success += reward
+
+print("Success rate:", 100 * nb_success / episodes)
