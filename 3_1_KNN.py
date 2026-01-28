@@ -83,7 +83,7 @@ Kod Akışı:
 # %%
 '''
 Bu bölüm, KNN algoritmasının sadece sınıflandırmada değil, regresyon (sayısal değer tahmini) problemlerinde de nasıl çalıştığını gürültülü bir sinüs dalgası üzerinden 
-simüle eder.
+simüle eder. Temel odak noktası, farklı ağırlıklandırma (weights) parametrelerinin modelin tahmin eğrisi üzerindeki etkisini görselleştirmektir.
 
 Proje İçeriği
 - Sentetik Veri Üretimi: Kontrollü bir deney alanı oluşturmak için sinüs dalgasına rastgele gürültü (noise) eklenmesi.
