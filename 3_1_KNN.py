@@ -1,5 +1,5 @@
 """
-Bu çalışma, Scikit-learn kütüphanesindeki "Breast Cancer" veri setini kullanarak, tümörlerin klinik özelliklerine göre iyi huylu (benign) veya kötü huylu(malignant) olup 
+Bu çalışma, Scikit-learn kütüphanesindeki "Breast Cancer" veri setini kullanarak, tümörlerin klinik özelliklerine göre iyi huylu (benign) veya kötü huylu (malignant) olup 
 olmadığını tahmin eden bir KNN (K-En Yakın Komşu) modelidir.
 
 Proje İçeriği:
@@ -7,7 +7,7 @@ Proje İçeriği:
 - Ön İşleme (Preprocessing): Modelin mesafe tabanlı çalışması nedeniyle verilerin StandardScaler ile normalize edilmesi.
 - Model ve Eğitim: K=3 parametresi ile KNN modelinin eğitilmesi.
 - Performans Metrikleri: Model başarısının Accuracy Score ve Confusion Matrix ile ölçülmesi.
-- Hiperparametre Optimizasyonu: Modelin başarısını etkileyen en önemli değer olan $K$ parametresinin (1-20 arası) test edilerek en iyi doğruluk skorunu veren K değerinin 
+- Hiperparametre Optimizasyonu: Modelin başarısını etkileyen en önemli değer olan "K" parametresinin (1-20 arası) test edilerek en iyi doğruluk skorunu veren K değerinin 
   bulunması ve görselleştirilmesi.
 
 Kullanılan Kütüphaneler:
@@ -76,7 +76,7 @@ Kod Akışı:
 2.	Veri %70 eğitim, %30 test olacak şekilde bölünür ve ölçeklendirilir.
 3.	KNN sınıflandırıcısı eğitilir ve test seti üzerinden tahminler üretilir.
 4.	Elde edilen doğruluk sonuçları ve hata matrisi ekrana yazdırılır.
-5.	Döngü yardımıyla farklı $K$ değerleri için doğruluk grafiği oluşturulur; bu grafik, modelin hangi $K$ değerinde "en dengeli" sonucu verdiğini gösterir
+5.	Döngü yardımıyla farklı "K" değerleri için doğruluk grafiği oluşturulur; bu grafik, modelin hangi K değerinde "en dengeli" sonucu verdiğini gösterir
 '''
 
 
