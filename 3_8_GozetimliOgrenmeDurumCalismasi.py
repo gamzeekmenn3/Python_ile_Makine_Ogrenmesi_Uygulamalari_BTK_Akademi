@@ -1,3 +1,15 @@
+'''
+Bu çalışma; beş farklı makine öğrenmesi algoritmasının performansını optimize eden, çapraz doğrulama (cross-validation) ile modelleri kıyaslayan ve nihayetinde bir Topluluk Oylaması (Voting Classifier) ile en 
+yüksek doğruluğa ulaşmayı hedefleyen kapsamlı bir uçtan uca iş akışını kapsamaktadır. Temel amaç, aynı sentetik veri seti üzerinde farklı algoritmaların potansiyelini keşfetmek ve en iyi sonuçları elde etmek için
+en güçlü modelleri birleştirerek Topluluk Öğrenmesi yöntemini uygulamaktır.
+
+*  Teknolojik Altyapı ve Kütüphaneler
+Analiz süreci, veri manipülasyonundan karmaşık modellemeye kadar modern kütüphaneler üzerine inşa edilmiştir:
+- Veri ve Görselleştirme: pandas, numpy, seaborn, matplotlib.
+- Modelleme: LogisticRegression, SVC, KNeighborsClassifier, RandomForestClassifier.
+- Optimizasyon: GridSearchCV, StratifiedKFold.
+- Topluluk Öğrenmesi: VotingClassifier.
+'''
 from sklearn.model_selection import train_test_split, StratifiedKFold, GridSearchCV
 from sklearn.linear_model import LogisticRegression
 from sklearn.svm import SVC
@@ -101,3 +113,14 @@ votingC = VotingClassifier(estimators = [("dt", best_estimators[0]),
 
 votingC = votingC.fit(X_train, y_train)
 print(accuracy_score(votingC.predict(X_test),y_test))
+'''
+Kod Akışı:
+1.	Veri Hazırlığı: Titanic veri seti boyutlarında, tamamen rastgele özelliklerden oluşan sentetik bir DataFrame oluşturulur.
+2.	Baseline Belirleme: Optimizasyon öncesi başarı kriterini belirlemek amacıyla Lojistik Regresyon ile bir temel skor alınır.
+3.	Model ve Hiperparametre Tanımlama: Beş farklı algoritma (Decision Tree, SVC, Random Forest, Logistic Regression, KNN) için geniş hiperparametre aralıkları belirlenir.
+4.	GridSearchCV ile Optimizasyon: Her model için çapraz doğrulama (CV) yapılarak en iyi parametre kombinasyonları tespit edilir.
+5.	Performans Karşılaştırma: Optimize edilmiş modellerin en iyi CV skorları, karşılaştırmalı bir çubuk grafik ile görselleştirilir.
+6.	Voting Classifier (Ensemble): En başarılı modeller (DT, SVC, RF, LR), soft voting yöntemiyle birleştirilir.
+o	Neden Soft Voting? Sadece etiketleri değil, modellerin tahmin olasılıklarını da hesaba katarak daha dengeli ve yüksek performanslı bir sonuç hedeflenir.
+7.	Final Değerlendirme: Oluşturulan topluluk modelinin nihai başarısı, test seti üzerinde doğruluk (accuracy) skoru ile ölçülür.
+'''
