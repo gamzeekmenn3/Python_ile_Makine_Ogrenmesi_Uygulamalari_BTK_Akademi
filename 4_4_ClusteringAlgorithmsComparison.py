@@ -1,6 +1,14 @@
+'''
+Bu proje, Scikit-Learn kütüphanesi tarafından sağlanan sentetik veri setleri (daireler, aylar, kümeler ve rastgele dağılım) üzerinde, 6 farklı kümeleme algoritmasının veriyi nasıl gruplandırdığını test eder. 
+Temel amaç, her algoritmanın geometrik olarak farklı şekillere sahip verilerde ne kadar başarılı olduğunu görsel olarak analiz etmektir.
+
+* Kullanılan Kütüphaneler: 
+- sklearn (scikit-learn): Projenin kalbidir. Kümeleme algoritmalarını (cluster), veri seti oluşturma araçlarını (datasets) ve veriyi ölçeklendirme modülünü (preprocessing) sağlar.
+- numpy: Sayısal hesaplamalar, veri manipülasyonu ve rastgele veri üretimi için kullanılır.
+- matplotlib.pyplot: Elde edilen sonuçların 2 boyutlu grafikler (scatter plot) üzerinde görselleştirilmesini sağlar.
+'''
 from sklearn import datasets, cluster
 from sklearn.preprocessing import StandardScaler
-
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -33,7 +41,6 @@ for i_dataset, dataset in enumerate(datasets):
     
     for name, algo in zip(clustering_names, clustering_algorithms):
         algo.fit(X)
-        
         if hasattr(algo, "labels_"):
             y_pred = algo.labels_.astype(int)
         else:
@@ -44,3 +51,13 @@ for i_dataset, dataset in enumerate(datasets):
             plt.title(name)
         plt.scatter(X[:,0], X[:, 1], color = colors[y_pred].tolist(), s = 10)
         i += 1
+'''
+* Kod Akışı:
+- Veri Setlerinin Hazırlanması: make_circles (içe içe halkalar), make_moons (ay şekilleri), make_blobs (standart kümeler) ve tamamen rastgele (no_structure) olmak üzere 4 farklı veri yapısı oluşturulur.
+- Ön İşleme (Scaling): Her veri seti StandardScaler ile standartlaştırılır. Bu, algoritmaların değişkenlerin ölçeğinden etkilenmemesini sağlar.
+- Algoritmaların Tanımlanması: MiniBatchKMeans, SpectralClustering, DBSCAN gibi farklı çalışma prensiplerine sahip 6 algoritma bir liste içinde yapılandırılır.
+- Döngü ve Eğitim:
+  - Dış döngü veri setlerini sırayla alır.
+  - İç döngü her veri seti için 6 algoritmayı tek tek çalıştırır (fit).
+- Tahmin ve Görselleştirme: Algoritmaların atadığı küme etiketleri (labels_) alınır ve plt.subplot kullanılarak her sonuç devasa bir ızgara (grid) üzerinde ilgili sütuna çizdirilir.
+'''
