@@ -1,3 +1,11 @@
+'''
+Bu proje, bağımsız değişkenler ile bağımlı bir hedef değişken arasındaki doğrusal ilişkiyi modellemeyi amaçlar. Simülasyon: Rastgele veriler üretilerek basit bir doğrunun (y = ax + b) nasıl öğrenildiği gösterilir.
+
+* Kullanılan Kütüphaneler
+- NumPy (np) -> Çok boyutlu diziler (arrays) oluşturmak ve matematiksel işlemler yapmak için kullanılır.
+- Matplotlib (plt) -> Verileri görselleştirmek ve regresyon çizgisini grafik üzerinde göstermek için kullanılır.
+- Scikit-learn (sklearn) -> Makine öğrenmesi algoritmalarını (LinearRegression), veri setlerini ve başarı metriklerini (MSE, R2) içerir.
+'''
 from sklearn.linear_model import LinearRegression
 import numpy as np
 import matplotlib.pyplot as plt
@@ -27,7 +35,14 @@ print("a0:", a0)
 for i in range(100):
     y_ = a0 + a1 * X
     plt.plot(X, y_, color = "green", alpha = 0.7)
-    
+
+'''
+* Kod Akışı:
+- Veri Oluşturma: np.random.rand ile 100 adet veri üretilir. Burada y = 3 + 4X formülü baz alınarak üzerine biraz gürültü (noise) eklenir.
+- Model Eğitimi: LinearRegression() nesnesi oluşturulur ve fit(X, y) metodu ile verilere en uygun doğruyu bulması sağlanır.
+- Katsayıların Belirlenmesi: Model, verideki eğimi (a1) ve kesim noktasını (a0) hesaplar. Kodun sonundaki for döngüsü aslında aynı çizgiyi 100 kez üst üste çizer(bu kısım görsel olarak tek bir yeşil çizgi 
+gibi görünür).
+'''
 #%%
 from sklearn.datasets import load_diabetes
 from sklearn.linear_model import LinearRegression
@@ -58,3 +73,13 @@ print("r2:", r2)
 
 plt.scatter(diabetes_X_test, diabetes_y_test, color = "black")
 plt.plot(diabetes_X_test, diabetes_y_pred, color = "blue")
+
+'''
+* Kod Akışı:
+- Veri Hazırlama: Diyabet veri seti yüklenir. Analizi basitleştirmek için sadece tek bir özellik (indeks 2 - genellikle BMI) seçilir: diabetes_X[:, np.newaxis, 2].
+- Eğitim ve Test Ayırımı: Verinin büyük bir kısmı modeli eğitmek için ayrılırken, son 20 veri örneği modelin başarısını test etmek için saklanır.
+- Tahmin: predict(diabetes_X_test) fonksiyonu ile modelin daha önce görmediği test verileri için sonuç üretmesi sağlanır.
+- Metrikler:
+    - MSE (Mean Squared Error): Tahminlerin gerçek değerlerden ne kadar saptığının karesel ortalamasıdır. Düşük olması istenir.
+    - R² (R-squared): Modelin verideki değişkenliği ne kadar iyi açıkladığını gösterir. 1'e yakın olması modelin başarılı olduğunu kanıtlar.
+'''
